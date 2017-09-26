@@ -101,7 +101,7 @@ class ViewController: UIViewController {
     }()
     
     var yAxis: CGFloat = 0
-    
+    var keyBoardHeight: CGFloat = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -169,7 +169,7 @@ class ViewController: UIViewController {
     func zoomOut(_ duration: CGFloat) {
         let transform = CGAffineTransform.identity
         self.containerView.animate(duration: self.animationduration, delay: self.delay, damping: self.damping, velocity: self.velocity, options: [self.options], transform: transform)
-        self.overlay.removeFromSuperview()
+       // self.overlay.removeFromSuperview()
     }
     
     //    func passTextView(_ textViewContainer: TextViewContainer) {
@@ -189,11 +189,27 @@ extension ViewController: FaceViewDelegate {
             print("stop")
             return
         }
+        
+        let keyboardHeight = self.keyBoardHeight
+        print("kk \(keyBoardHeight)")
 
-        var scale = self.view.frame.width / textViewContainer.frame.size.width
+        var fullScale = (self.view.frame.width / textViewContainer.frame.size.width)
+        print("fullscale width \(fullScale)")
+
+        let multiplier : CGFloat = 0.8
+        var scale: CGFloat = fullScale * multiplier
+        
+        let totalWidth = self.view.frame.width
+        let desiredWidth = totalWidth * multiplier
+        let desiredPaddingX = (totalWidth - desiredWidth) / 2
+        
+        let totalHeight = self.view.frame.height
+        let desiredHeight = totalWidth * multiplier
+        let desiredPaddingY = (totalHeight - desiredHeight) / 2
+        
         switch self.cardType1 {
         case .flat:
-            defineTranslationForFlatCard(in: self.containerView, containerSuperview: self.view, scale: scale, cardFrame: self.cardView.frame, textLayerViewFrame: textViewContainer.frame, paddingX: 0, paddingY: (self.navigationController?.navigationBar.frame.maxY)!)
+            defineTranslationForFlatCard(in: self.containerView, containerSuperview: self.view, scale: scale, cardFrame: self.cardView.frame, textLayerViewFrame: textViewContainer.frame, paddingX: desiredPaddingX, paddingY: (self.navigationController?.navigationBar.frame.maxY)!)
             
             self.view.addSubview(overlay)
         case .folded:
@@ -229,7 +245,7 @@ extension ViewController: FaceViewDelegate {
             }
             print("HFX \(halfCardFaceX), HFY \(halfCardFaceY)")
             
-            defineTranslationForFoldedCard(of: container!, in: self.view, scale: scale, cardFrame: (cardView?.frame)!, textLayerViewFrame: textViewContainer.frame, cardType: .flat, deltaHalfCardX: halfCardFaceX, deltaHalfCardY: halfCardFaceY, paddingX: 0, paddingY: (self.navigationController?.navigationBar.frame.maxY)!, viewScaled: textViewContainer)
+            defineTranslationForFoldedCard(of: container!, in: self.view, scale: scale, cardFrame: (cardView?.frame)!, textLayerViewFrame: textViewContainer.frame, cardType: .flat, deltaHalfCardX: halfCardFaceX, deltaHalfCardY: halfCardFaceY, paddingX: desiredPaddingX, paddingY: desiredPaddingY, viewScaled: textViewContainer)
     
         }
     }
@@ -275,57 +291,27 @@ extension ViewController: FaceViewDelegate {
         containerView.animate(duration: self.animationduration, delay: self.delay, damping: self.damping, velocity: self.velocity, options: [self.options], transform: transform)
         //CALL IT HERE?
         self.applyScale(scale: scale, toView: containerView)
-        
-        print("scaledView frame zoomin \(scaledView?.frame)")
-        print("KMLAYER scaledView zoomin \(scaledView?.layer.frame)")
-
-        
         //get the height of t
         let kHeight: CGFloat = 250
         
         let newRect = self.view.convert((scaledView?.frame)!, from: scaledView?.superview!)
 
         print("NEWRECT = \(newRect)")
-
-        let remainingHeight = self.view.frame.size.height - kHeight
-        let posY = (remainingHeight - newRect.height ) / 2 + 64
+//        let newFrame = CGRect(x: 0, y: 64, width: self.view.frame.width, height: newRect.height)
+//        overlay.frame = newFrame
+//        self.view.addSubview(overlay)
         
-        print("POSY \(posY)")
-        let newFrame = CGRect(x: 0, y: 64, width: self.view.frame.width, height: newRect.height)
-
-        overlay.frame = newFrame
-        self.view.addSubview(overlay)
     }
     
     fileprivate func applyScale(scale: CGFloat, toView view: UIView) {
         view.contentScaleFactor = scale
         view.layer.contentsScale = scale
         for subview in view.subviews {
-            if subview is  TextViewContainer {
-               // self.updateFrame(of: subview)
-                print("NEW FRAME \(subview.frame)")
-                print("NEW LAYER \(subview.layer.frame)")
-               // subview.layer.borderWidth = 0
-                //subview.subviews[0].layer.borderWidth = 0
-
-                let navY = (self.navigationController?.navigationBar.frame.maxY)!
-                let textH =  view.layer.frame.origin.y
-                let y = navY + textH
-
-               
-            }
             self.applyScale(scale: scale, toView: subview)
         }
     }
     
-    func updateFrame(of view: UIView) {
-        view.layoutIfNeeded()
-    }
 }
-
-
-
-
 
 
 extension ViewController {
@@ -340,10 +326,11 @@ extension ViewController {
         
         let keyboardFrame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect
         if let keyboardFrame = keyboardFrame {
-            let keyboardHeight = keyboardFrame.height
+            let keyboardHeightLocal = keyboardFrame.height
             let keyboardDuration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double
             if let keyboardDuration = keyboardDuration {
                 
+                self.keyBoardHeight = keyboardHeightLocal
                 //   let y = self.getTranslationY(from: keyboardHeight)
                 // self.zoomIn(y)
             }

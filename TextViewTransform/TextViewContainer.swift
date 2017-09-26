@@ -32,12 +32,13 @@ class TextViewContainer: UIView, UITextViewDelegate {
         super.init(frame: frame)
         
         let w = frame.width * 0.7
-        let h = frame.height * 0.8
+        let h = frame.height * 0.4
         let x = (frame.size.width - w) / 2
         let y = (frame.size.height - h) / 2
         
         textView.frame = CGRect(x: x, y: y, width: w, height: h)
         textView.delegate = self
+        textView.text = "Esto es un test"
         addSubview(textView)
     }
     
@@ -48,6 +49,9 @@ class TextViewContainer: UIView, UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         delegate?.passTextView(self)
+        DispatchQueue.main.async {
+            textView.selectAll(nil)
+        }
     }
     
 //    func textViewDidChange(_ textView: UITextView) {
@@ -60,32 +64,6 @@ class TextViewContainer: UIView, UITextViewDelegate {
         return true
     }
     
-//    func updateTextFont(textView : UITextView) {
-//
-//        if (textView.text.isEmpty || textView.bounds.size.equalTo(CGSize.zero)) {
-//            return
-//        }
-//
-//        let textViewSize = textView.frame.size
-//        let fixedWidth = textViewSize.width
-//
-//        let expectSize = textView.sizeThatFits(CGSize(width : fixedWidth, height : CGFloat(MAXFLOAT)));
-//
-//        var expectFont = textView.font;
-//        if (expectSize.height > textViewSize.height) {
-//            while (textView.sizeThatFits(CGSize(width : fixedWidth, height : CGFloat(MAXFLOAT))).height > textViewSize.height) {
-//                expectFont = textView.font!.withSize(textView.font!.pointSize - 1)
-//                textView.font = expectFont
-//            }
-//        }
-//        else {
-//            while (textView.sizeThatFits(CGSize(width : fixedWidth,height : CGFloat(MAXFLOAT))).height < textViewSize.height) {
-//                expectFont = textView.font;
-//                textView.font = textView.font!.withSize(textView.font!.pointSize + 1)
-//            }
-//            textView.font = expectFont;
-//        }
-//    }
 
 }
 

@@ -28,7 +28,7 @@ class FaceView: UIView, TextViewContainerDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         let w = frame.width * 0.5
-        let h = frame.height * 0.7
+        let h = frame.height * 0.4
         let x = (frame.size.width - w) / 2
         let y = (frame.size.height - h) / 2
         
