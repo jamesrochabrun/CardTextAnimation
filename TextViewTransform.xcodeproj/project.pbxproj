@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B919E0A1F7474F000649AE8 /* UIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B919E091F7474F000649AE8 /* UIController.swift */; };
+		7B919E0C1F7618DA00649AE8 /* FaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B919E0B1F7618DA00649AE8 /* FaceView.swift */; };
+		7B919E0E1F7618FD00649AE8 /* TextViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B919E0D1F7618FD00649AE8 /* TextViewContainer.swift */; };
 		7BC9922C1F71AB7C006F4EA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC9922B1F71AB7C006F4EA2 /* AppDelegate.swift */; };
 		7BC9922E1F71AB7C006F4EA2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC9922D1F71AB7C006F4EA2 /* ViewController.swift */; };
 		7BC992311F71AB7C006F4EA2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BC9922F1F71AB7C006F4EA2 /* Main.storyboard */; };
@@ -15,6 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7B919E091F7474F000649AE8 /* UIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIController.swift; sourceTree = "<group>"; };
+		7B919E0B1F7618DA00649AE8 /* FaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceView.swift; sourceTree = "<group>"; };
+		7B919E0D1F7618FD00649AE8 /* TextViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewContainer.swift; sourceTree = "<group>"; };
 		7BC992281F71AB7C006F4EA2 /* TextViewTransform.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TextViewTransform.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BC9922B1F71AB7C006F4EA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BC9922D1F71AB7C006F4EA2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,10 +62,13 @@
 			children = (
 				7BC9922B1F71AB7C006F4EA2 /* AppDelegate.swift */,
 				7BC9922D1F71AB7C006F4EA2 /* ViewController.swift */,
+				7B919E091F7474F000649AE8 /* UIController.swift */,
 				7BC9922F1F71AB7C006F4EA2 /* Main.storyboard */,
 				7BC992321F71AB7C006F4EA2 /* Assets.xcassets */,
 				7BC992341F71AB7C006F4EA2 /* LaunchScreen.storyboard */,
 				7BC992371F71AB7C006F4EA2 /* Info.plist */,
+				7B919E0B1F7618DA00649AE8 /* FaceView.swift */,
+				7B919E0D1F7618FD00649AE8 /* TextViewContainer.swift */,
 			);
 			path = TextViewTransform;
 			sourceTree = "<group>";
@@ -137,7 +146,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				7BC9922E1F71AB7C006F4EA2 /* ViewController.swift in Sources */,
+				7B919E0E1F7618FD00649AE8 /* TextViewContainer.swift in Sources */,
 				7BC9922C1F71AB7C006F4EA2 /* AppDelegate.swift in Sources */,
+				7B919E0A1F7474F000649AE8 /* UIController.swift in Sources */,
+				7B919E0C1F7618DA00649AE8 /* FaceView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +287,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9U3Y9N9NEJ;
 				INFOPLIST_FILE = TextViewTransform/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.james.TextViewTransform;
@@ -289,6 +302,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9U3Y9N9NEJ;
 				INFOPLIST_FILE = TextViewTransform/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.james.TextViewTransform;
